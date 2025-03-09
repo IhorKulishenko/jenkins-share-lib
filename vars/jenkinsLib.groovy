@@ -9,14 +9,17 @@ def pullImage(String imageName) {
 }
 
 def undeployOldApp(String containerName) {
-    sh '''
-        container_id=$(docker ps --filter "name=${containerName}" --format='{{json .ID}}' | tr -d '"')
+    // sh '''
+    //     container_id=$(docker ps --filter "name=${containerName}" --format='{{json .ID}}' | tr -d '"')
 
-        if [ -n "${container_id}" ]; then
-            docker container stop ${container_id}
-            docker container rm ${container_id}
-        fi
-    '''
+    //     if [ -n "${container_id}" ]; then
+    //         docker container stop ${container_id}
+    //         docker container rm ${container_id}
+    //     fi
+    // '''
+    sh "docker container stop ${containerName} || true"    
+    sh "docker container rm ${containerName} || true"
+    sh "docker image prune -f"
 }
 
 def deployToDev(String containerName, String imageName) {

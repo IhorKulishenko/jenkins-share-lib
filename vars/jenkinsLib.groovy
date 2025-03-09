@@ -23,6 +23,6 @@ def deployToDev(String containerName, String imageName) {
      sh "docker run -d --name ${containerName} -p 3001:3000 ${imageName}"
 }
 
-def deployToMaster(String containerName, String imageName) {
+def deployToMain(String containerName, String imageName) {
      sh "docker run -d --name ${containerName} -p 3000:3000 ${imageName}"
 }
